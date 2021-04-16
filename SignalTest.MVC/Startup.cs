@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using SignalTest.MVC.Data;
 using SignalTest.MVC.Data.Repository;
 using SignalTest.MVC.Domain.Interfaces;
-using SignalTest.MVC.Domain.Services;
 using SignalTest.MVC.Hub;
+using SignalTest.MVC.Services;
 
 namespace SignalTest.MVC
 {
@@ -35,6 +35,7 @@ namespace SignalTest.MVC
 
             services.AddScoped<IUserInstanceService, UserInstanceService>();
             services.AddScoped<IUserInstanceRepository, UserInstanceRepository>();
+            services.AddScoped<IProcessService, ProcessService>();
 
             services.AddControllersWithViews();
 
@@ -61,6 +62,8 @@ namespace SignalTest.MVC
 
             app.UseAuthorization();
 
+            var idProvider = new CustomUserIdProvider();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -68,7 +71,8 @@ namespace SignalTest.MVC
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapHub<ChatHub>("hub/chat");
-                endpoints.MapHub<InstanceHub>("hub/instances");
+                endpoints.MapHub<InstanceHub>("hub/instancias");
+                endpoints.MapHub<ProcessarHub>("hub/processamento");
             });
         }
     }
