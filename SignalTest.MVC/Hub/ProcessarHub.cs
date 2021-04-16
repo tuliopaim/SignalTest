@@ -17,12 +17,4 @@ namespace SignalTest.MVC.Hub
             _service.Processar(Context.UserIdentifier);
         }
     }
-
-    public class CustomUserIdProvider : IUserIdProvider
-    {
-        public string? GetUserId(HubConnectionContext connection)
-        {
-            return "usuario";
-        }
-    }
 }

@@ -19,11 +19,11 @@ namespace SignalTest.MVC.Services
         {
             for (var i = 0; i < 10; i++)
             {
-                await Task.Delay(5000);
+                await Task.Delay(2000);
 
                 var itemProcessado = $"Item {i} processado...";
 
-                await _hub.Clients.All
+                await _hub.Clients.User(id)
                     .SendAsync("ReportProcessamento", itemProcessado, i * 10);
             }
         }

@@ -1,16 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SignalTest.MVC.Data;
 using SignalTest.MVC.Data.Repository;
+using SignalTest.MVC.Domain.Entities;
 using SignalTest.MVC.Domain.Interfaces;
 using SignalTest.MVC.Hub;
 using SignalTest.MVC.Services;
@@ -32,12 +30,27 @@ namespace SignalTest.MVC
             services.AddDbContext<ApplicationContext>(
                 opt => 
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            
             services.AddScoped<IUserInstanceService, UserInstanceService>();
             services.AddScoped<IUserInstanceRepository, UserInstanceRepository>();
             services.AddScoped<IProcessService, ProcessService>();
 
+            services.AddDefaultIdentity<User>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 3;
+            })
+            .AddEntityFrameworkStores<ApplicationContext>();
+
+            services.AddAuthentication();
+
             services.AddControllersWithViews();
+
+            services.AddRazorPages();
 
             services.AddSignalR();
         }
@@ -60,15 +73,16 @@ namespace SignalTest.MVC
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
-            var idProvider = new CustomUserIdProvider();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
 
                 endpoints.MapHub<ChatHub>("hub/chat");
                 endpoints.MapHub<InstanceHub>("hub/instancias");
