@@ -12,6 +12,8 @@ namespace SignalTest.MVC.Domain.Entities
 
         public Guid Id { get; private set; }
 
+        public string Nome { get; set; }
+
         public DateTime VistoPorUltimo { get; private set; }
 
         public string VistoPorUltimoStr => VistoPorUltimo.ToString("G");

@@ -15,6 +15,11 @@ namespace SignalTest.MVC.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            modelBuilder.Entity<UserInstance>()
+                .Property(x => x.Nome)
+                .IsRequired()
+                .HasMaxLength(200);
         }
     }
 }
