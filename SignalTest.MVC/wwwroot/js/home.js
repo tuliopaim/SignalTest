@@ -3,14 +3,14 @@
 var connection;
 
 $(function() {
-    connection = new signalR.HubConnectionBuilder().withUrl("/hub/instances").build();
+    connection = new signalR.HubConnectionBuilder().withUrl("/hub/instancias").build();
 
     connection.on("InstanciasOnline", renderizarLista);
 
     connection.on("MeuId", SetarBoasVindas);
 
     connection.start().then(atualizarLista).catch(function (err) {
-        return console.error(err.toString());
+        return console.log(err.toString());
     });
 
     $("#criarRegistro").on('click', criarInstancia);

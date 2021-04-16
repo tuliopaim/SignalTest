@@ -16,7 +16,7 @@ connection.on("ReceiveMessage", function (user, message) {
 connection.start().then(function () {
     document.getElementById("sendButton").disabled = false;
 }).catch(function (err) {
-    return console.error(err.toString());
+    return console.log(err.toString());
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
@@ -25,7 +25,7 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     var message = $("#messageInput").val();
     
     connection.invoke("SendMessage", user, message).catch(function (err) {
-        return console.error(err.toString());
+        return console.log(err.toString());
     });
 
     event.preventDefault();
