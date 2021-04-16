@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SignalTest.MVC.Data;
+using SignalTest.MVC.Domain.Interfaces;
+using SignalTest.MVC.Domain.Services;
 using SignalTest.MVC.Hub;
 
 namespace SignalTest.MVC
@@ -29,6 +31,9 @@ namespace SignalTest.MVC
             services.AddDbContext<ApplicationContext>(
                 opt => 
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IUserInstanceService, UserInstanceService>();
+            services.AddScoped<IUserInstanceRepository, IUserInstanceRepository>();
 
             services.AddControllersWithViews();
 
