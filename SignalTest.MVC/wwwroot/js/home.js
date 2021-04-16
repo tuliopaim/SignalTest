@@ -5,18 +5,9 @@ var connection;
 $(function() {
     connection = new signalR.HubConnectionBuilder().withUrl("/hub/instances").build();
 
-    connection.on("InstanciasOnline", function (lista) {
-        renderizarLista(lista);
-    });
+    connection.on("InstanciasOnline", renderizarLista);
 
-    connection.on("MeuId", function (user) {
-        let boasVindas = 'Olá ' + user.nome + ', ';
-
-        $("#criarRegistro").prop('disabled', true);
-
-        $('#boasVindas').prepend(boasVindas);
-        $("#userId").val(user.id);
-    });
+    connection.on("MeuId", SetarBoasVindas);
 
     connection.start().catch(function (err) {
         return console.error(err.toString());
@@ -28,6 +19,15 @@ $(function() {
 
     $("#atualizarLista").on('click', atualizarLista);
 });
+
+function SetarBoasVindas (user) {
+    let boasVindas = 'Olá ' + user.nome + ', ';
+
+    $("#criarRegistro").prop('disabled', true);
+
+    $('#boasVindas').prepend(boasVindas);
+    $("#userId").val(user.id);
+}
 
 function criarInstancia(e) {
     e.preventDefault();
