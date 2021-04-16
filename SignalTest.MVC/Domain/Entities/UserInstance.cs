@@ -16,9 +16,7 @@ namespace SignalTest.MVC.Domain.Entities
         public string Nome { get; set; }
 
         public DateTime VistoPorUltimo { get; private set; }
-
-        public string VistoPorUltimoStr => VistoPorUltimo.ToString("G");
-
+        
         public void Atualizar()
         {
             VistoPorUltimo = DateTime.Now;

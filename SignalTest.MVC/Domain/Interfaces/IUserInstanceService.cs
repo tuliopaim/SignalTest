@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SignalTest.MVC.Domain.Entities;
+using SignalTest.MVC.DTOs;
 
 namespace SignalTest.MVC.Domain.Interfaces
 {
     public interface IUserInstanceService
     {
-        Task<IEnumerable<UserInstance>> ObterTodosOnline();
+        Task<IEnumerable<UserInstanceDto>> ObterTodosOnline();
         Task<int> ObterQuantidadeOnline();
-        Task<UserInstance> ObterPorId(Guid userId);
-        Task<IEnumerable<UserInstance>> ObterTodos();
+        Task<UserInstanceDto> ObterPorId(Guid userId);
+        Task<IEnumerable<UserInstanceDto>> ObterTodos();
         Task AtualizarVistoPorUltimo(Guid userId);
-        Task<UserInstance> Add(string nome);
+        Task<UserInstanceDto> Add(string nome);
         Task Update(UserInstance user);
         Task Remove(UserInstance user);
     }
