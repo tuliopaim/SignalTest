@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using SignalTest.MVC.Domain.Entities;
 
 namespace SignalTest.MVC.Data
 {
@@ -8,6 +9,8 @@ namespace SignalTest.MVC.Data
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
         }
+
+        public DbSet<UserInstance> UserInstances { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
