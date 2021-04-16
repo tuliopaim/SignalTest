@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Chat";
+}
+
+<style>
+
+</style>
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="form-group">
+        <label for="userInput">Usuario</label>
+        <input type="text" id="userInput" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="userInput">Message</label>
+        <input type="text" id="messageInput" class="form-control" />
+    </div>
+    <input type="button" id="sendButton" class="btn btn-primary" value="Send Message" />
+</div>
+<div class="row">
+    <div class="col-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <ul id="messagesList" class="list-group list-group-flush"></ul>
+    </div>
+</div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
