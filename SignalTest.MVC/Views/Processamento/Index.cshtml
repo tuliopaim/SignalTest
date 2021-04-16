@@ -1,0 +1,27 @@
+﻿@model Guid
+
+@{
+    ViewData["Title"] = "Processamento Fake";
+}
+
+<input type="hidden" id="userId" value="@Model"/>
+
+<div class="container">
+    
+    <input type="button" id="processar" class="btn btn-primary" value="Processar" />
+
+    <hr />
+
+    <div class="row">
+        <ul id="itensProcessados" class="list-group list-group-flush"></ul>
+    </div>
+    
+</div>
+
+@section Scripts
+{
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/processar.js"></script>
+}
+
+
