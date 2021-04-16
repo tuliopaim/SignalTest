@@ -50,9 +50,9 @@ namespace SignalTest.MVC.Domain.Services
             await _repository.Update(user);
         }
 
-        public async Task<UserInstance> Add()
+        public async Task<UserInstance> Add(string nome)
         {
-            var user = new UserInstance();
+            var user = new UserInstance(nome);
 
             await _repository.Add(user);
 

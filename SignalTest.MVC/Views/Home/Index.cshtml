@@ -2,12 +2,22 @@
     ViewData["Title"] = "Home Page";
 }
 
-<input type="hidden" id="userId"/>
+<input type="hidden" id="userId" value=""/>
 
 <div class="container">
+
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" class="form-control" />
+    </div>
+
+    <input type="button" id="criarRegistro" class="btn btn-primary" value="Criar Instancia" />
+
+    <hr />
+
     <div class="row">
-        <h4>
-            <span id="quantity">0</span> users online!
+        <h4 id="boasVindas">
+            <span id="quantity">0</span> usuários online!
         </h4>
     </div>
 
@@ -17,7 +27,14 @@
 
     <hr />
 
-    <input type="button" id="estouOnline" class="btn btn-primary" value="Estou online!" />
+    <div class="row">
+        <div class="col-4">
+            <input type="button" id="estouOnline" class="btn btn-primary" value="Estou online!" />
+        </div>
+        <div class="col-4">
+            <input type="button" id="atualizarLista" class="btn btn-primary" value="Atualizar lista" />
+        </div>
+    </div>
 </div>
 
 @section Scripts

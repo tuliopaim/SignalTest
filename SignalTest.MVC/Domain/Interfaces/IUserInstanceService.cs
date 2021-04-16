@@ -12,7 +12,7 @@ namespace SignalTest.MVC.Domain.Interfaces
         Task<UserInstance> ObterPorId(Guid userId);
         Task<IEnumerable<UserInstance>> ObterTodos();
         Task AtualizarVistoPorUltimo(Guid userId);
-        Task<UserInstance> Add();
+        Task<UserInstance> Add(string nome);
         Task Update(UserInstance user);
         Task Remove(UserInstance user);
     }

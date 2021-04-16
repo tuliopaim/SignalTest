@@ -4,9 +4,10 @@ namespace SignalTest.MVC.Domain.Entities
 {
     public class UserInstance
     {
-        public UserInstance()
+        public UserInstance(string nome)
         {
             Id = Guid.NewGuid();
+            Nome = nome;
             VistoPorUltimo = DateTime.Now;
         }
 

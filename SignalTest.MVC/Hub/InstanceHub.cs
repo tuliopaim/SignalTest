@@ -15,23 +15,30 @@ namespace SignalTest.MVC.Hub
             _service = service;
         }
 
-        public async Task SouNovoAqui()
+        public async Task SouNovoAqui(string nome)
         {
-            var user = await _service.Add();
+            var user = await _service.Add(nome);
 
-            await Clients.All.SendAsync("MeuId", user.Id);
+            await Clients.Caller.SendAsync("MeuId", user);
 
-            await EnviarInstanciasOnline();
+            await AtualizarInstanciasOnlineParaTodos();
         }
 
         public async Task EstouAqui(Guid id)
         {
             await _service.AtualizarVistoPorUltimo(id);
 
-            await EnviarInstanciasOnline();
+            await AtualizarInstanciasOnlineParaTodos();
         }
 
-        private async Task EnviarInstanciasOnline()
+        public async Task AtualizarInstanciasOnline()
+        {
+            var lista = await _service.ObterTodosOnline();
+
+            await Clients.Caller.SendAsync("InstanciasOnline", lista);
+        }
+
+        public async Task AtualizarInstanciasOnlineParaTodos()
         {
             var lista = await _service.ObterTodosOnline();
 

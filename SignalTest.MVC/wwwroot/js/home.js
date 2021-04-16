@@ -1,38 +1,55 @@
 ﻿"use strict";
 
+var connection;
+
 $(function() {
-    var connection = new signalR.HubConnectionBuilder().withUrl("/hub/instances").build();
-
-    $("#estouOnline").on('click', function (e) {
-        debugger;
-
-        e.preventDefault();
-        
-        var userId = $("#userId").val();
-
-        connection.invoke("EstouAqui", userId);
-    });
+    connection = new signalR.HubConnectionBuilder().withUrl("/hub/instances").build();
 
     connection.on("InstanciasOnline", function (lista) {
         renderizarLista(lista);
     });
 
-    connection.on("MeuId", function (id) {
-        debugger;
+    connection.on("MeuId", function (user) {
+        let boasVindas = 'Olá ' + user.nome + ', ';
 
-        $("#userId").val(id);
+        $("#criarRegistro").prop('disabled', true);
+
+        $('#boasVindas').prepend(boasVindas);
+        $("#userId").val(user.id);
     });
 
-    connection.start().then(function () {
-
-        connection.invoke("SouNovoAqui");
-
-    }).catch(function (err) {
+    connection.start().catch(function (err) {
         return console.error(err.toString());
     });
-    
 
+    $("#criarRegistro").on('click', criarInstancia);
+
+    $("#estouOnline").on('click', estouOnline);
+
+    $("#atualizarLista").on('click', atualizarLista);
 });
+
+function criarInstancia(e) {
+    e.preventDefault();
+
+    let nome = $("#nome").val();
+
+    connection.invoke("SouNovoAqui", nome);
+}
+
+function estouOnline(e) {
+    e.preventDefault();
+
+    let userId = $("#userId").val();
+
+    connection.invoke("EstouAqui", userId);
+}
+
+function atualizarLista(e) {
+    e.preventDefault();
+
+    connection.invoke("AtualizarInstanciasOnline");
+}
 
 function renderizarLista(lista) {
     let quantidadeOnline = lista.length;
@@ -47,11 +64,10 @@ function renderizarLista(lista) {
         let user = lista[i];
 
         let li = '<li class="list-group-item"><b>' +
-            user.id + '</b> online às <b>' + user.vistoPorUltimoStr +
+            user.nome + '</b> online às <b>' + user.vistoPorUltimoStr +
             '</b></li>';
 
         listaUsers.append(li);
     }
 }
-
 
