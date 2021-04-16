@@ -9,7 +9,7 @@ $(function() {
 
     connection.on("MeuId", SetarBoasVindas);
 
-    connection.start().catch(function (err) {
+    connection.start().then(atualizarLista).catch(function (err) {
         return console.error(err.toString());
     });
 
@@ -46,7 +46,7 @@ function estouOnline(e) {
 }
 
 function atualizarLista(e) {
-    e.preventDefault();
+    if(e) e.preventDefault();
 
     connection.invoke("AtualizarInstanciasOnline");
 }
