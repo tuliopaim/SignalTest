@@ -22,14 +22,28 @@ namespace SignalTest.MVC.Data.Repository
             return await _context.UserInstances.FindAsync(id);
         }
 
-        public async Task<IEnumerable<UserInstance>> Get()
+        public async Task<IEnumerable<UserInstance>> ObterTodos()
         {
             return await _context.UserInstances.AsNoTracking().ToListAsync();
         }
 
+        public async Task<int> ObterQuantidadeDesde(DateTime data)
+        {
+            return await _context.UserInstances
+                .Where(x => x.VistoPorUltimo >= data)
+                .CountAsync();
+        }
+
+        public async Task<IEnumerable<UserInstance>> ObterTodosOnline(DateTime data)
+        {
+            return await _context.UserInstances
+                .Where(x => x.VistoPorUltimo >= data)
+                .ToListAsync();
+        }
+
         public async Task Add(UserInstance user)
         {
-            await _context.UserInstances.AddAsync(user);
+           await _context.UserInstances.AddAsync(user);
 
             await _context.SaveChangesAsync();
         }

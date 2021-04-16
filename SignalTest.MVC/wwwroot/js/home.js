@@ -1,22 +1,57 @@
 ﻿"use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/hub/chat").build();
+$(function() {
+    var connection = new signalR.HubConnectionBuilder().withUrl("/hub/instances").build();
 
-connection.on("HeIsHere", function (user, message) {
-    debugger;
+    $("#estouOnline").on('click', function (e) {
+        debugger;
 
-    let quantity = $("#quantity");
+        e.preventDefault();
+        
+        var userId = $("#userId").val();
 
-    let pessoasOnline = parseInt(quantity.html(), 10);
-    pessoasOnline++;
+        connection.invoke("EstouAqui", userId);
+    });
 
-    quantity.html(pessoasOnline);
+    connection.on("InstanciasOnline", function (lista) {
+        renderizarLista(lista);
+    });
+
+    connection.on("MeuId", function (id) {
+        debugger;
+
+        $("#userId").val(id);
+    });
+
+    connection.start().then(function () {
+
+        connection.invoke("SouNovoAqui");
+
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+    
+
 });
 
-connection.start().then(function () {
+function renderizarLista(lista) {
+    let quantidadeOnline = lista.length;
 
-    connection.invoke("ImHere");
+    $("#quantity").html(quantidadeOnline);
 
-}).catch(function (err) {
-    return console.error(err.toString());
-});
+    var listaUsers = $("#usersOnline");
+
+    listaUsers.html('');
+
+    for (let i = 0; i < quantidadeOnline; i++) {
+        let user = lista[i];
+
+        let li = '<li class="list-group-item"><b>' +
+            user.id + '</b> online às <b>' + user.vistoPorUltimoStr +
+            '</b></li>';
+
+        listaUsers.append(li);
+    }
+}
+
+

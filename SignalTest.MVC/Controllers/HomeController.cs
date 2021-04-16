@@ -6,19 +6,20 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using SignalTest.MVC.Domain.Interfaces;
 
 namespace SignalTest.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IUserInstanceService _service;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IUserInstanceService service)
         {
-            _logger = logger;
+            _service = service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }
