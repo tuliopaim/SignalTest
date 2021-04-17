@@ -1,4 +1,5 @@
-﻿@{
+﻿@model string
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -8,7 +9,7 @@
 
     <div class="row">
         <h4 id="boasVindas">
-            Olá @User?.Identity?.Name, <span id="quantity">0</span> usuários online!
+            Olá @Model, <span id="quantity">0</span> usuários online nos últimos 5 minutos!
         </h4>
     </div>
 

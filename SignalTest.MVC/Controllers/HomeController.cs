@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SignalTest.MVC.Models;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using SignalTest.MVC.Domain.Interfaces;
 
 namespace SignalTest.MVC.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IUserInstanceService _service;
 
@@ -18,14 +19,9 @@ namespace SignalTest.MVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(nameof(Index), ObterNomeUsuarioLogado());
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
