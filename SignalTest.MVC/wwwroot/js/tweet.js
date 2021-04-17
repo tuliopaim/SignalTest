@@ -1,16 +1,19 @@
 ﻿"use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/hub/chat").build();
+var connection = new signalR.HubConnectionBuilder().withUrl("/hub/tweet").build();
 
 //Disable send button until connection is established
 document.getElementById("sendButton").disabled = true;
 
-connection.on("ReceiveMessage", function (user, message) {
-    let htmlMsg = "<b>" + user + ":</b> " + message;
+connection.on("ReceiveTweet", function (tweet) {
+    let listaDeMensagens = $("#messagesList");
+    
+    let htmlMsg = "<b>" + tweet.nomeUsuario + ":</b> " + tweet.mensagem;
+    htmlMsg += ' - <span class="data-tweet"> ' + tweet.dataStr + '</span>';
 
     var li = '<li class="list-group-item">' + htmlMsg + '</li>';
 
-    $("#messagesList").append(li);
+    listaDeMensagens.append(li);
 });
 
 connection.start().then(function () {
@@ -20,11 +23,9 @@ connection.start().then(function () {
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
-
-    var user = $("#userInput").val();
     var message = $("#messageInput").val();
     
-    connection.invoke("SendMessage", user, message).catch(function (err) {
+    connection.invoke("SendTweet", message).catch(function (err) {
         return console.log(err.toString());
     });
 
