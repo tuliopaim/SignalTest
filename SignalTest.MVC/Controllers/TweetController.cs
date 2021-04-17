@@ -1,25 +1,27 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+using SignalTest.MVC.Domain.Interfaces;
 
 namespace SignalTest.MVC.Controllers
 {
     [Authorize]
     public class TweetController : BaseController
     {
-        public TweetController()
+        private readonly ITweetService _service;
+
+        public TweetController(ITweetService service)
         {
-            
-        }
-        public IActionResult Index()
-        {
-            return View();
+            _service = service;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Tweetar(string mensagem)
+        public async Task<IActionResult> Index()
         {
-            return Ok();
+            var tweets = await _service.ObterTodos();
+            
+            return View(nameof(Index), tweets);
         }
     }
 }
