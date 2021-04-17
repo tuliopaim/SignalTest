@@ -8,13 +8,13 @@ namespace SignalTest.MVC.Domain.Interfaces
 {
     public interface IUserInstanceService
     {
+        Task EstouAqui(string idString);
+        Task AtualizarInstanciasOnlineHub();
         Task<IEnumerable<UserInstanceDto>> ObterTodosOnline();
-        Task<int> ObterQuantidadeOnline();
         Task<UserInstanceDto> ObterPorId(Guid userId);
         Task<IEnumerable<UserInstanceDto>> ObterTodos();
         Task AtualizarVistoPorUltimo(Guid userId);
-        Task<UserInstanceDto> Add(string nome);
-        Task Update(UserInstance user);
-        Task Remove(UserInstance user);
+        Task Update(User user);
+        Task Remove(User user);
     }
 }

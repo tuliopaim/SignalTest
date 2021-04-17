@@ -13,21 +13,10 @@ namespace SignalTest.MVC.Hub
         {
             _service = service;
         }
-
-        public async Task SouNovoAqui(string nome)
+        
+        public async Task EstouAqui()
         {
-            var user = await _service.Add(nome);
-
-            await Clients.Caller.SendAsync("MeuId", user);
-
-            await AtualizarInstanciasOnlineParaTodos();
-        }
-
-        public async Task EstouAqui(Guid id)
-        {
-            await _service.AtualizarVistoPorUltimo(id);
-
-            await AtualizarInstanciasOnlineParaTodos();
+            await _service.EstouAqui(Context.UserIdentifier);
         }
 
         public async Task AtualizarInstanciasOnline()
@@ -39,9 +28,7 @@ namespace SignalTest.MVC.Hub
 
         public async Task AtualizarInstanciasOnlineParaTodos()
         {
-            var lista = await _service.ObterTodosOnline();
-
-            await Clients.All.SendAsync("InstanciasOnline", lista);
+            await _service.AtualizarInstanciasOnlineHub();
         }
     }
 }

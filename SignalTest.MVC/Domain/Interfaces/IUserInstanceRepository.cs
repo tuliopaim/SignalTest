@@ -8,11 +8,10 @@ namespace SignalTest.MVC.Domain.Interfaces
     public interface IUserInstanceRepository
     {
         Task<int> ObterQuantidadeDesde(DateTime data);
-        Task<IEnumerable<UserInstance>> ObterTodosOnline(DateTime data);
-        Task<UserInstance> ObterPorId(Guid id);
-        Task<IEnumerable<UserInstance>> ObterTodos();
-        Task Add(UserInstance user);
-        Task Update(UserInstance user);
-        Task Remove(UserInstance user);
+        Task<IEnumerable<User>> ObterTodosOnline(DateTime data);
+        Task<User> ObterPorId(Guid id);
+        Task<IEnumerable<User>> ObterTodos();
+        Task Update(User user);
+        Task Remove(User user);
     }
 }

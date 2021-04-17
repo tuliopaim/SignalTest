@@ -6,43 +6,20 @@ $(function() {
     connection = new signalR.HubConnectionBuilder().withUrl("/hub/instancias").build();
 
     connection.on("InstanciasOnline", renderizarLista);
-
-    connection.on("MeuId", SetarBoasVindas);
-
+    
     connection.start().then(atualizarLista).catch(function (err) {
         return console.log(err.toString());
     });
-
-    $("#criarRegistro").on('click', criarInstancia);
-
+    
     $("#estouOnline").on('click', estouOnline);
 
     $("#atualizarLista").on('click', atualizarLista);
 });
 
-function SetarBoasVindas (user) {
-    let boasVindas = 'Olá ' + user.nome + ', ';
-
-    $("#criarRegistro").prop('disabled', true);
-
-    $('#boasVindas').prepend(boasVindas);
-    $("#userId").val(user.id);
-}
-
-function criarInstancia(e) {
-    e.preventDefault();
-
-    let nome = $("#nome").val();
-
-    connection.invoke("SouNovoAqui", nome);
-}
-
 function estouOnline(e) {
     e.preventDefault();
 
-    let userId = $("#userId").val();
-
-    connection.invoke("EstouAqui", userId);
+    connection.invoke("EstouAqui");
 }
 
 function atualizarLista(e) {
@@ -69,5 +46,4 @@ function renderizarLista(lista) {
 
         listaUsers.append(li);
     }
-}
-
+} 

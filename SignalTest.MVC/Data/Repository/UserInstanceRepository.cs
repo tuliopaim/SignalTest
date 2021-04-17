@@ -17,14 +17,14 @@ namespace SignalTest.MVC.Data.Repository
             _context = context;
         }
 
-        public async Task<UserInstance> ObterPorId(Guid id)
+        public async Task<User> ObterPorId(Guid id)
         {
-            return await _context.UserInstances.FindAsync(id);
+            return await _context.Users.FindAsync(id);
         }
 
-        public async Task<IEnumerable<UserInstance>> ObterTodos()
+        public async Task<IEnumerable<User>> ObterTodos()
         {
-            return await _context.UserInstances.AsNoTracking().ToListAsync();
+            return await _context.Users.AsNoTracking().ToListAsync();
         }
 
         public async Task<int> ObterQuantidadeDesde(DateTime data)
@@ -34,30 +34,23 @@ namespace SignalTest.MVC.Data.Repository
                 .CountAsync();
         }
 
-        public async Task<IEnumerable<UserInstance>> ObterTodosOnline(DateTime data)
+        public async Task<IEnumerable<User>> ObterTodosOnline(DateTime data)
         {
-            return await _context.UserInstances
+            return await _context.Users
                 .Where(x => x.VistoPorUltimo >= data)
                 .ToListAsync();
         }
-
-        public async Task Add(UserInstance user)
+        
+        public async Task Update(User user)
         {
-           await _context.UserInstances.AddAsync(user);
+            _context.Users.Update(user);
 
             await _context.SaveChangesAsync();
         }
 
-        public async Task Update(UserInstance user)
+        public async Task Remove(User user)
         {
-            _context.UserInstances.Update(user);
-
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task Remove(UserInstance user)
-        {
-            _context.UserInstances.Remove(user);
+            _context.Users.Remove(user);
 
             await _context.SaveChangesAsync();
         }
