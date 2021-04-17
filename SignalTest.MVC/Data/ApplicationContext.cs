@@ -21,10 +21,10 @@ namespace SignalTest.MVC.Data
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            //modelBuilder.Entity<User>()
-            //    .Property(x => x.Nome)
-            //    .IsRequired()
-            //    .HasMaxLength(200);
+            modelBuilder.Entity<User>()
+                .Property(x => x.Nome)
+                .IsRequired()
+                .HasMaxLength(200);
         }
     }
 }
