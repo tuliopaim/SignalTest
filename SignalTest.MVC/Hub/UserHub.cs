@@ -5,11 +5,11 @@ using SignalTest.MVC.Domain.Interfaces;
 
 namespace SignalTest.MVC.Hub
 {
-    public class InstanceHub : Microsoft.AspNetCore.SignalR.Hub
+    public class UserHub : Microsoft.AspNetCore.SignalR.Hub
     {
         private readonly IUserInstanceService _service;
 
-        public InstanceHub(IUserInstanceService service)
+        public UserHub(IUserInstanceService service)
         {
             _service = service;
         }
@@ -23,12 +23,12 @@ namespace SignalTest.MVC.Hub
         {
             var lista = await _service.ObterTodosOnline();
 
-            await Clients.Caller.SendAsync("InstanciasOnline", lista);
+            await Clients.Caller.SendAsync("UsuariosOnline", lista);
         }
 
         public async Task AtualizarInstanciasOnlineParaTodos()
         {
-            await _service.NotificarInstanciasOnlineHub();
+            await _service.NotificarUsuariosOnlineHub();
         }
     }
 }

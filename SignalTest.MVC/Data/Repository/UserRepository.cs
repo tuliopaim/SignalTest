@@ -8,11 +8,11 @@ using SignalTest.MVC.Domain.Interfaces;
 
 namespace SignalTest.MVC.Data.Repository
 {
-    public class UserInstanceRepository : IUserInstanceRepository
+    public class UserRepository : IUserInstanceRepository
     {
         private readonly ApplicationContext _context;
 
-        public UserInstanceRepository(ApplicationContext context)
+        public UserRepository(ApplicationContext context)
         {
             _context = context;
         }

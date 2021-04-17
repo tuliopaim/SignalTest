@@ -3,9 +3,9 @@
 var connection;
 
 $(function() {
-    connection = new signalR.HubConnectionBuilder().withUrl("/hub/instancias").build();
+    connection = new signalR.HubConnectionBuilder().withUrl("/hub/user").build();
 
-    connection.on("InstanciasOnline", renderizarLista);
+    connection.on("UsuariosOnline", renderizarLista);
     
     connection.start().then(atualizarLista).catch(function (err) {
         return console.log(err.toString());

@@ -10,7 +10,7 @@ namespace SignalTest.MVC.Domain.Interfaces
     {
         Task NotificarLogin(string email);
         Task EstouAqui(string idString);
-        Task NotificarInstanciasOnlineHub();
+        Task NotificarUsuariosOnlineHub();
         Task<IEnumerable<UserInstanceDto>> ObterTodosOnline();
         Task<UserInstanceDto> ObterPorId(Guid userId);
         Task<IEnumerable<UserInstanceDto>> ObterTodos();

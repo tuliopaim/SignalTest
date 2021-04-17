@@ -12,16 +12,16 @@ using SignalTest.MVC.Hub;
 
 namespace SignalTest.MVC.Services
 {
-    public class UserInstanceService : IUserInstanceService
+    public class UserService : IUserInstanceService
     {
         private readonly IUserInstanceRepository _repository;
         private readonly UserManager<User> _userManager;
-        private readonly IHubContext<InstanceHub> _hub;
+        private readonly IHubContext<UserHub> _hub;
 
-        public UserInstanceService(
+        public UserService(
             IUserInstanceRepository repository,
             UserManager<User> userManager,
-            IHubContext<InstanceHub> hub)
+            IHubContext<UserHub> hub)
         {
             _repository = repository;
             _userManager = userManager;
@@ -38,7 +38,7 @@ namespace SignalTest.MVC.Services
 
             await _repository.Update(user);
 
-            await NotificarInstanciasOnlineHub();
+            await NotificarUsuariosOnlineHub();
         }
         
         public async Task EstouAqui(string idString)
@@ -48,14 +48,14 @@ namespace SignalTest.MVC.Services
 
             await AtualizarVistoPorUltimo(id);
 
-            await NotificarInstanciasOnlineHub();
+            await NotificarUsuariosOnlineHub();
         }
 
-        public async Task NotificarInstanciasOnlineHub()
+        public async Task NotificarUsuariosOnlineHub()
         {
             var lista = await ObterTodosOnline();
 
-            await _hub.Clients.All.SendAsync("InstanciasOnline", lista);
+            await _hub.Clients.All.SendAsync("UsuariosOnline", lista);
         }
 
         public async Task<IEnumerable<UserInstanceDto>> ObterTodosOnline()
