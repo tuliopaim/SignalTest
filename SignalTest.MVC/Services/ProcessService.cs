@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using SignalTest.MVC.Domain.Interfaces;
 using SignalTest.MVC.Hub;

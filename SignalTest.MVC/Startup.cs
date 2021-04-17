@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SignalTest.MVC.Data;
 using SignalTest.MVC.Data.Repository;
@@ -46,7 +45,12 @@ namespace SignalTest.MVC
             })
             .AddEntityFrameworkStores<ApplicationContext>();
 
-            services.AddAuthentication();
+            services.AddAuthentication()
+                .Services.ConfigureApplicationCookie(options =>
+                {
+                    options.SlidingExpiration = true;
+                    options.ExpireTimeSpan = TimeSpan.FromHours(12);
+                });
 
             services.AddControllersWithViews();
 

@@ -1,15 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SignalTest.MVC.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using SignalTest.MVC.Domain.Interfaces;
 
 namespace SignalTest.MVC.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IUserInstanceService _service;
@@ -19,7 +16,7 @@ namespace SignalTest.MVC.Controllers
             _service = service;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }

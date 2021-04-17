@@ -1,5 +1,3 @@
-using System;
-
 namespace SignalTest.MVC.Models
 {
     public class ErrorViewModel

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using SignalTest.MVC.Domain.Interfaces;
+﻿using SignalTest.MVC.Domain.Interfaces;
 
 namespace SignalTest.MVC.Hub
 {
