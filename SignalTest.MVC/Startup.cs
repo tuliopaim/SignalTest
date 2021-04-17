@@ -30,8 +30,11 @@ namespace SignalTest.MVC
                 opt => 
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
-            services.AddScoped<IUserInstanceService, UserInstanceService>();
             services.AddScoped<IUserInstanceRepository, UserInstanceRepository>();
+            services.AddScoped<ITweetRepository, TweetRepository>();
+
+            services.AddScoped<IUserInstanceService, UserInstanceService>();
+            services.AddScoped<ITweetService, TweetService>();
             services.AddScoped<IProcessService, ProcessService>();
 
             services.AddDefaultIdentity<User>(options =>
@@ -88,7 +91,7 @@ namespace SignalTest.MVC
 
                 endpoints.MapRazorPages();
 
-                endpoints.MapHub<ChatHub>("hub/chat");
+                endpoints.MapHub<TweetHub>("hub/tweet");
                 endpoints.MapHub<InstanceHub>("hub/instancias");
                 endpoints.MapHub<ProcessarHub>("hub/processamento");
             });
