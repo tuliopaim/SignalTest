@@ -55,8 +55,6 @@ namespace SignalTest.MVC.Services
         {
             var lista = await ObterTodosOnline();
 
-            lista ??= new List<UserInstanceDto>();
-
             await _hub.Clients.All.SendAsync("InstanciasOnline", lista);
         }
 
@@ -65,6 +63,8 @@ namespace SignalTest.MVC.Services
             var data = DateTime.Now.AddMinutes(-5);
 
             var lista = await _repository.ObterTodosOnline(data);
+
+            lista ??= new List<User>();
 
             return lista.Select(ConverterParaViewModel);
         }
@@ -78,6 +78,8 @@ namespace SignalTest.MVC.Services
         public async Task<IEnumerable<UserInstanceDto>> ObterTodos()
         {
             var lista = await _repository.ObterTodos();
+
+            lista ??= new List<User>();
 
             return lista.Select(ConverterParaViewModel);
         }
@@ -98,6 +100,11 @@ namespace SignalTest.MVC.Services
             await _repository.Update(user);
         }
         
+        public async Task Remove(User user)
+        {
+            await _repository.Remove(user);
+        }
+        
         private static UserInstanceDto ConverterParaViewModel(User user)
         {
             if (user is null) return null;
@@ -108,11 +115,6 @@ namespace SignalTest.MVC.Services
                 Nome = user.Nome,
                 VistoPorUltimo = user.VistoPorUltimo
             };
-        }
-        
-        public async Task Remove(User user)
-        {
-            await _repository.Remove(user);
         }
     }
 }
