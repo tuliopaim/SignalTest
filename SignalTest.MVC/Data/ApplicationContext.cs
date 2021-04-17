@@ -12,9 +12,7 @@ namespace SignalTest.MVC.Data
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
         }
-
-        public DbSet<UserInstance> UserInstances { get; set; }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
