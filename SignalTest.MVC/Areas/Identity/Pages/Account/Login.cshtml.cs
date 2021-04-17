@@ -93,14 +93,7 @@ namespace SignalTest.MVC.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
 
-                    var user = await _userManager.FindByNameAsync(Input.Email);
-
-                    if (user != null)
-                    {
-                        await _instanceService.AtualizarVistoPorUltimo(user.Id);
-
-                        await _instanceService.AtualizarInstanciasOnlineHub();
-                    }
+                    await _instanceService.NotificarLogin(Input.Email);
 
                     return LocalRedirect(returnUrl);
                 }

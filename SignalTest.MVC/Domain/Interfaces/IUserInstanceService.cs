@@ -8,8 +8,9 @@ namespace SignalTest.MVC.Domain.Interfaces
 {
     public interface IUserInstanceService
     {
+        Task NotificarLogin(string email);
         Task EstouAqui(string idString);
-        Task AtualizarInstanciasOnlineHub();
+        Task NotificarInstanciasOnlineHub();
         Task<IEnumerable<UserInstanceDto>> ObterTodosOnline();
         Task<UserInstanceDto> ObterPorId(Guid userId);
         Task<IEnumerable<UserInstanceDto>> ObterTodos();

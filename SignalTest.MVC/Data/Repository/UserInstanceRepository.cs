@@ -27,13 +27,6 @@ namespace SignalTest.MVC.Data.Repository
             return await _context.Users.AsNoTracking().ToListAsync();
         }
 
-        public async Task<int> ObterQuantidadeDesde(DateTime data)
-        {
-            return await _context.UserInstances
-                .Where(x => x.VistoPorUltimo >= data)
-                .CountAsync();
-        }
-
         public async Task<IEnumerable<User>> ObterTodosOnline(DateTime data)
         {
             return await _context.Users

@@ -28,7 +28,7 @@ namespace SignalTest.MVC.Hub
 
         public async Task AtualizarInstanciasOnlineParaTodos()
         {
-            await _service.AtualizarInstanciasOnlineHub();
+            await _service.NotificarInstanciasOnlineHub();
         }
     }
 }

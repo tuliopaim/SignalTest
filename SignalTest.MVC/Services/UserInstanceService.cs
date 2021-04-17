@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using SignalTest.MVC.Domain.Entities;
 using SignalTest.MVC.Domain.Interfaces;
@@ -13,14 +15,30 @@ namespace SignalTest.MVC.Services
     public class UserInstanceService : IUserInstanceService
     {
         private readonly IUserInstanceRepository _repository;
+        private readonly UserManager<User> _userManager;
         private readonly IHubContext<InstanceHub> _hub;
 
         public UserInstanceService(
             IUserInstanceRepository repository,
+            UserManager<User> userManager,
             IHubContext<InstanceHub> hub)
         {
             _repository = repository;
+            _userManager = userManager;
             _hub = hub;
+        }
+
+        public async Task NotificarLogin(string email)
+        {
+            var user = await _userManager.FindByNameAsync(email);
+
+            if (user is null) return;
+
+            user.Atualizar();
+
+            await _repository.Update(user);
+
+            await NotificarInstanciasOnlineHub();
         }
         
         public async Task EstouAqui(string idString)
@@ -30,10 +48,10 @@ namespace SignalTest.MVC.Services
 
             await AtualizarVistoPorUltimo(id);
 
-            await AtualizarInstanciasOnlineHub();
+            await NotificarInstanciasOnlineHub();
         }
 
-        public async Task AtualizarInstanciasOnlineHub()
+        public async Task NotificarInstanciasOnlineHub()
         {
             var lista = await ObterTodosOnline();
 
