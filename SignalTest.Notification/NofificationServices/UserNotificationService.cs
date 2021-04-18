@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
-using SignalTest.Notification.Hub;
-using SignalTest.Notification.Interfaces;
+using SignalTest.Domain.Interfaces.Notification;
+using SignalTest.Infra.Notification.Hub;
+using SignalTest.Infra.Notification.Interfaces;
 
-namespace SignalTest.Notification.NofificationServices
+namespace SignalTest.Infra.Notification.NofificationServices
 {
     public class UserNotificationService : IUserNotificationService
     {
@@ -14,7 +15,7 @@ namespace SignalTest.Notification.NofificationServices
             _hub = hub;
         }
 
-        public async Task NotificarUsuarioOnline(string usuario)
+        public async Task NotificarUsuariosOnline(string usuario)
         {
             await _hub.Clients.All.UsuarioOnline(usuario);
         }

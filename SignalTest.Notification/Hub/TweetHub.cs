@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using SignalTest.Notification.Interfaces;
+using SignalTest.Infra.Notification.Interfaces;
 
-namespace SignalTest.Notification.Hub
+namespace SignalTest.Infra.Notification.Hub
 {
     public class TweetHub : Hub<ITweetHub>
     {

@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SignalTest.MVC.Models;
 using System.Diagnostics;
-using System.Linq;
 using Microsoft.AspNetCore.Authorization;
-using SignalTest.MVC.Domain.Interfaces;
+using SignalTest.Application.Services.Interfaces;
 
 namespace SignalTest.MVC.Controllers
 {

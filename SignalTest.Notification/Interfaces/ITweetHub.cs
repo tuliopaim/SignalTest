@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace SignalTest.Notification.Interfaces
+namespace SignalTest.Infra.Notification.Interfaces
 {
     public interface ITweetHub
     {

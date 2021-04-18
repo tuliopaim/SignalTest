@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SignalTest.MVC.Domain.Interfaces;
+using SignalTest.Application.Services.Interfaces;
 
 namespace SignalTest.MVC.Controllers
 {

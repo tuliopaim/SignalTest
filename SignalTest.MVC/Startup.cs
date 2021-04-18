@@ -3,14 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using Microsoft.EntityFrameworkCore;
-using SignalTest.MVC.Data;
-using SignalTest.MVC.Data.Repository;
-using SignalTest.MVC.Domain.Entities;
-using SignalTest.MVC.Domain.Interfaces;
-using SignalTest.MVC.Hub;
-using SignalTest.MVC.Services;
+using SignalTest.Infra.Data;
+using SignalTest.Infra.Notification.Hub;
+using SignalTest.MVC.Configuration;
 
 namespace SignalTest.MVC
 {
@@ -30,30 +26,9 @@ namespace SignalTest.MVC
                 opt => 
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
-            services.AddScoped<IUserInstanceRepository, UserRepository>();
-            services.AddScoped<ITweetRepository, TweetRepository>();
-
-            services.AddScoped<IUserInstanceService, UserService>();
-            services.AddScoped<ITweetService, TweetService>();
-            services.AddScoped<IProcessService, ProcessService>();
-
-            services.AddDefaultIdentity<User>(options =>
-            {
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 6;
-                options.Password.RequiredUniqueChars = 3;
-            })
-            .AddEntityFrameworkStores<ApplicationContext>();
-
-            services.AddAuthentication()
-                .Services.ConfigureApplicationCookie(options =>
-                {
-                    options.SlidingExpiration = true;
-                    options.ExpireTimeSpan = TimeSpan.FromHours(12);
-                });
+            services.InjectServices();
+            
+            services.InjectIdentity();
 
             services.AddControllersWithViews();
 
@@ -93,7 +68,7 @@ namespace SignalTest.MVC
 
                 endpoints.MapHub<TweetHub>("hub/tweet");
                 endpoints.MapHub<UserHub>("hub/user");
-                endpoints.MapHub<ProcessarHub>("hub/processamento");
+                endpoints.MapHub<ProcessamentoHub>("hub/processamento");
             });
         }
     }
