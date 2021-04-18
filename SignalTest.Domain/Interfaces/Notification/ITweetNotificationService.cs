@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
+using SignalTest.Domain.DTOs;
 
 namespace SignalTest.Domain.Interfaces.Notification
 {
     public interface ITweetNotificationService
     {
-        Task NotificarNovoTweet(string tweet);
+        Task NotificarNovoTweet(TweetDto tweet);
     }
 }

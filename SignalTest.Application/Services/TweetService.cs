@@ -44,7 +44,9 @@ namespace SignalTest.Application.Services
 
             await _repository.Add(tweet);
 
-            await _notification.NotificarNovoTweet(mensagem);
+            var tweetDto = ConverterParaViewModel(tweet);
+
+            await _notification.NotificarNovoTweet(tweetDto);
         }
 
         private static TweetDto ConverterParaViewModel(Tweet tweet)
