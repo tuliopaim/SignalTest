@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace SignalTest.Application.DTOs
+namespace SignalTest.Domain.DTOs
 {
-    public class UserInstanceDto
+    public class UserDto
     {
         public Guid Id { get; set; }
 
@@ -11,6 +11,5 @@ namespace SignalTest.Application.DTOs
         public DateTime VistoPorUltimo { get; set; }
 
         public string VistoPorUltimoStr => VistoPorUltimo.ToString("G");
-
     }
 }

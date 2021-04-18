@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SignalTest.Application.DTOs;
 using SignalTest.Application.Services.Interfaces;
+using SignalTest.Domain.DTOs;
 using SignalTest.Domain.Entities;
 using SignalTest.Domain.Interfaces.Notification;
 using SignalTest.Domain.Interfaces.Repository;

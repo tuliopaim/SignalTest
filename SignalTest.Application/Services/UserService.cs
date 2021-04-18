@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using SignalTest.Application.DTOs;
 using SignalTest.Application.Services.Interfaces;
+using SignalTest.Domain.DTOs;
 using SignalTest.Domain.Entities;
 using SignalTest.Domain.Interfaces.Notification;
 using SignalTest.Domain.Interfaces.Repository;
 
 namespace SignalTest.Application.Services
 {
-    public class UserService : IUserInstanceService
+    public class UserService : IUserService
     {
         private readonly IUserInstanceRepository _repository;
         private readonly UserManager<User> _userManager;
@@ -37,7 +37,9 @@ namespace SignalTest.Application.Services
 
             await _repository.Update(user);
 
-            await NotificarUsuariosOnlineHub();
+            var userDto = ConverterParaViewModel(user);
+
+            await _notification.NotificarNovoUsuarioOnline(userDto);
         }
         
         public async Task EstouAqui(string idString)
@@ -47,15 +49,12 @@ namespace SignalTest.Application.Services
 
             await AtualizarVistoPorUltimo(id);
 
-            await NotificarUsuariosOnlineHub();
+            var usuarios = await ObterTodosOnline();
+
+            await _notification.NotificarUsuariosOnline(usuarios);
         }
 
-        public async Task NotificarLogin(UserInstanceDto userDto)
-        {
-            await _notification.NotificarUsuarioOnline(userDto.Nome);
-        }
-
-        public async Task<IEnumerable<UserInstanceDto>> ObterTodosOnline()
+        public async Task<IEnumerable<UserDto>> ObterTodosOnline()
         {
             var data = DateTime.Now.AddMinutes(-5);
 
@@ -66,13 +65,13 @@ namespace SignalTest.Application.Services
             return lista.Select(ConverterParaViewModel);
         }
 
-        public async Task<UserInstanceDto> ObterPorId(Guid userId)
+        public async Task<UserDto> ObterPorId(Guid userId)
         {
             var user = await _repository.ObterPorId(userId);
             return ConverterParaViewModel(user);
         }
 
-        public async Task<IEnumerable<UserInstanceDto>> ObterTodos()
+        public async Task<IEnumerable<UserDto>> ObterTodos()
         {
             var lista = await _repository.ObterTodos();
 
@@ -102,7 +101,7 @@ namespace SignalTest.Application.Services
             await _repository.Remove(user);
         }
         
-        private static UserInstanceDto ConverterParaViewModel(User user)
+        private static UserDto ConverterParaViewModel(User user)
         {
             if (user is null) return null;
 

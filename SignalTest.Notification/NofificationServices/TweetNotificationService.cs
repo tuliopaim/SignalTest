@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using SignalTest.Domain.Interfaces.Notification;
-using SignalTest.Infra.Notification.Hub;
+using SignalTest.Infra.Notification.Hubs;
 using SignalTest.Infra.Notification.Interfaces;
 
 namespace SignalTest.Infra.Notification.NofificationServices

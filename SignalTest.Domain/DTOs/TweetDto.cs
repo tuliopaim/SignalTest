@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SignalTest.Application.DTOs
+namespace SignalTest.Domain.DTOs
 {
     public class TweetDto
     {

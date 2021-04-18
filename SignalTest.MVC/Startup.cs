@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using SignalTest.Infra.Data;
-using SignalTest.Infra.Notification.Hub;
+using SignalTest.Infra.Notification.Hubs;
 using SignalTest.MVC.Configuration;
 
 namespace SignalTest.MVC

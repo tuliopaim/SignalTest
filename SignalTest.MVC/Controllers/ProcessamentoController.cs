@@ -8,9 +8,9 @@ namespace SignalTest.MVC.Controllers
     [Authorize]
     public class ProcessamentoController : Controller
     {
-        private readonly IUserInstanceService _service;
+        private readonly IUserService _service;
 
-        public ProcessamentoController(IUserInstanceService service)
+        public ProcessamentoController(IUserService service)
         {
             _service = service;
         }

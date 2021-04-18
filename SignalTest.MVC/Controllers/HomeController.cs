@@ -9,9 +9,9 @@ namespace SignalTest.MVC.Controllers
     [Authorize]
     public class HomeController : BaseController
     {
-        private readonly IUserInstanceService _service;
+        private readonly IUserService _service;
 
-        public HomeController(IUserInstanceService service)
+        public HomeController(IUserService service)
         {
             _service = service;
         }

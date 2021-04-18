@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using SignalTest.Application.DTOs;
+using SignalTest.Domain.DTOs;
 
 namespace SignalTest.Application.Services.Interfaces
 {

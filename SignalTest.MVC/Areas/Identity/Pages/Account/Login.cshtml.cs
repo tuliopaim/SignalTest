@@ -17,7 +17,7 @@ namespace SignalTest.MVC.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly UserManager<User> _userManager;
-        private readonly IUserInstanceService _instanceService;
+        private readonly IUserService _service;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
@@ -25,10 +25,10 @@ namespace SignalTest.MVC.Areas.Identity.Pages.Account
             SignInManager<User> signInManager, 
             ILogger<LoginModel> logger,
             UserManager<User> userManager,
-            IUserInstanceService instanceService)
+            IUserService service)
         {
             _userManager = userManager;
-            _instanceService = instanceService;
+            _service = service;
             _signInManager = signInManager;
             _logger = logger;
         }
@@ -89,7 +89,7 @@ namespace SignalTest.MVC.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
 
-                    await _instanceService.NotificarLogin(Input.Email);
+                    await _service.NotificarLogin(Input.Email);
 
                     return LocalRedirect(returnUrl);
                 }

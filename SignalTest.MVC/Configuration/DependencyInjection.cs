@@ -18,7 +18,7 @@ namespace SignalTest.MVC.Configuration
             services.AddScoped<IUserInstanceRepository, UserRepository>();
             services.AddScoped<ITweetRepository, TweetRepository>();
 
-            services.AddScoped<IUserInstanceService, UserService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITweetService, TweetService>();
             services.AddScoped<IProcessService, ProcessService>();
 
