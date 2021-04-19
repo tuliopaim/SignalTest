@@ -5,7 +5,7 @@ using SignalTest.Domain.Interfaces.Notification;
 using SignalTest.Infra.Notification.Hubs;
 using SignalTest.Infra.Notification.Interfaces;
 
-namespace SignalTest.Infra.Notification.NofificationServices
+namespace SignalTest.Infra.Notification.NotificationServices
 {
     public class ProcessoNotificationService : IProcessoNotificationService
     {

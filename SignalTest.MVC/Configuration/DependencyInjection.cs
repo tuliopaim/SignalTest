@@ -7,7 +7,7 @@ using SignalTest.Domain.Interfaces.Services;
 using SignalTest.Domain.Services;
 using SignalTest.Infra.Data;
 using SignalTest.Infra.Data.Repository;
-using SignalTest.Infra.Notification.NofificationServices;
+using SignalTest.Infra.Notification.NotificationServices;
 
 namespace SignalTest.MVC.Configuration
 {
