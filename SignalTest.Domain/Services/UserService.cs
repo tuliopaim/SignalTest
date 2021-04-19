@@ -17,6 +17,8 @@ namespace SignalTest.Domain.Services
         private readonly UserManager<User> _userManager;
         private readonly IUserNotificationService _notification;
 
+        private readonly int MINUTOS_CONSIDERADOS_ONLINE = 5;
+
         public UserService(
             IUserInstanceRepository repository,
             UserManager<User> userManager,
@@ -60,7 +62,7 @@ namespace SignalTest.Domain.Services
 
         public async Task<IEnumerable<UserDto>> ObterTodosOnline()
         {
-            var data = DateTime.Now.AddSeconds(-35);
+            var data = DateTime.Now.AddMinutes(-MINUTOS_CONSIDERADOS_ONLINE);
 
             var lista = await _repository.ObterTodosOnline(data);
 
