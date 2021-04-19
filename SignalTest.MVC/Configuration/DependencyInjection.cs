@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
-using SignalTest.Application.Services;
-using SignalTest.Application.Services.Interfaces;
 using SignalTest.Domain.Entities;
 using SignalTest.Domain.Interfaces.Notification;
 using SignalTest.Domain.Interfaces.Repository;
+using SignalTest.Domain.Interfaces.Services;
+using SignalTest.Domain.Services;
 using SignalTest.Infra.Data;
 using SignalTest.Infra.Data.Repository;
 using SignalTest.Infra.Notification.NofificationServices;

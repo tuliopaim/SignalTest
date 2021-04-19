@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SignalTest.Application.Services.Interfaces;
+using SignalTest.Domain.Interfaces.Services;
 
 namespace SignalTest.MVC.Controllers
 {

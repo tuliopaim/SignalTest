@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using SignalTest.Application.Services.Interfaces;
 using SignalTest.Domain.Entities;
+using SignalTest.Domain.Interfaces.Services;
 
 namespace SignalTest.MVC.Areas.Identity.Pages.Account
 {

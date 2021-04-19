@@ -2,8 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using SignalTest.Application.InputModels;
-using SignalTest.Application.Services.Interfaces;
+using SignalTest.Domain.Interfaces.Services;
 
 namespace SignalTest.MVC.Controllers
 {

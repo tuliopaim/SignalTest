@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SignalTest.Application\SignalTest.Application.csproj" />
     <ProjectReference Include="..\SignalTest.Data\SignalTest.Infra.Data.csproj" />
     <ProjectReference Include="..\SignalTest.Domain\SignalTest.Domain.csproj" />
     <ProjectReference Include="..\SignalTest.Notification\SignalTest.Infra.Notification.csproj" />
