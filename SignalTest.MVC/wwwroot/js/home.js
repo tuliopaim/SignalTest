@@ -5,9 +5,13 @@ var connection;
 $(function() {
     connection = new signalR.HubConnectionBuilder().withUrl("/hub/user").build();
 
+    $("#estouOnline").prop('disabled', true);
+
     connection.on("UsuariosOnline", renderizarLista);
     
-    connection.start().catch(function (err) {
+    connection.start().then(function() {
+        $("#estouOnline").prop('disabled', false);
+    }).catch(function (err) {
         return console.log(err.toString());
     });
     

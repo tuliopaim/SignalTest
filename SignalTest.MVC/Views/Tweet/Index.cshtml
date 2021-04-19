@@ -29,18 +29,22 @@
 
     <div class="row">
         <div id="tweets-container" class="col-12">
-            <ul id="messagesList" class="list-group list-group-flush"></ul>
-            @foreach (var tweet in Model)
-            {
-                <li class="list-group-item">
-                    <b>@tweet.NomeUsuario</b><br/>
-                    @tweet.Mensagem <br/>
-                    <span class="data-tweet"> @tweet.DataStr </span>
-                </li>
-            }
+            <ul id="messagesList" class="list-group list-group-flush">
+                @foreach (var tweet in Model)
+                {
+                    <li class="list-group-item">
+                        <b>@tweet.NomeUsuario</b><br />
+                        @tweet.Mensagem <br />
+                        <span class="data-tweet"> @tweet.DataStr </span>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
 </div>
 
-<script src="~/js/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/tweet.js"></script>
+@section Scripts
+{
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/tweet.js"></script>
+}

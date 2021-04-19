@@ -1,33 +1,49 @@
 ﻿"use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/hub/tweet").build();
+var connection;
 
-//Disable send button until connection is established
-document.getElementById("sendButton").disabled = true;
-
-connection.on("ReceiveTweet", function (tweet) {
-    let listaDeMensagens = $("#messagesList");
+$(function() {
+    connection = new signalR.HubConnectionBuilder().withUrl("/hub/tweet").build();
     
-    let htmlMsg = "<b>" + tweet.nomeUsuario + ":</b> " + tweet.mensagem;
-    htmlMsg += ' - <span class="data-tweet"> ' + tweet.dataStr + '</span>';
+    $("#sendButton").prop('disabled', true);
 
-    var li = '<li class="list-group-item">' + htmlMsg + '</li>';
+    connection.on("NovoTweet", renderizarNovoTweet);
 
-    listaDeMensagens.append(li);
-});
-
-connection.start().then(function () {
-    document.getElementById("sendButton").disabled = false;
-}).catch(function (err) {
-    return console.log(err.toString());
-});
-
-document.getElementById("sendButton").addEventListener("click", function (event) {
-    var message = $("#messageInput").val();
-    
-    connection.invoke("SendTweet", message).catch(function (err) {
+    connection.start().then(function () {
+        $("#sendButton").prop('disabled', false);
+    }).catch(function (err) {
         return console.log(err.toString());
     });
 
-    event.preventDefault();
+    $("#sendButton").on('click', novoTweet);
+
 });
+
+function renderizarNovoTweet(tweet) {
+    let listaDeMensagens = $("#messagesList");
+
+    let htmlMsg = "<b>" +
+        tweet.nomeUsuario +
+        "</b><br /> " +
+        tweet.mensagem +
+        "<br />" +
+        '<span class="data-tweet">' +
+        tweet.dataStr +
+        '</span>';
+
+    var li = '<li class="list-group-item">' + htmlMsg + '</li>';
+
+    listaDeMensagens.prepend(li);
+}
+
+function novoTweet(e) {
+    e.preventDefault();
+
+    let mensagem = $("#messageInput").val();
+
+    $.ajax({
+        type: "POST",
+        url: "/Tweet/NovoTweet?mensagem=" + mensagem,
+        body: mensagem
+    });
+}
