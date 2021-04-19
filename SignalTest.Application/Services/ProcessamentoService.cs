@@ -5,20 +5,20 @@ using SignalTest.Domain.Interfaces.Notification;
 
 namespace SignalTest.Application.Services
 {
-    public class ProcessService : IProcessService
+    public class ProcessamentoService : IProcessamentoService
     {
         private readonly IProcessoNotificationService _notification;
 
-        public ProcessService(IProcessoNotificationService notification)
+        public ProcessamentoService(IProcessoNotificationService notification)
         {
             _notification = notification;
         }
 
         public async Task Processar(Guid id)
         {
-            for (var i = 0; i <= 10; i++)
+            for (var i = 1; i <= 10; i++)
             {
-                await Task.Delay(2000);
+                await Task.Delay(1000);
 
                 var itemProcessado = $"Item {i} processado...";
 

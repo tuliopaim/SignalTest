@@ -3,9 +3,13 @@
 $(function () {
     connection = new signalR.HubConnectionBuilder().withUrl("/hub/processamento").build();
 
-    connection.on("ReportProcessamento", renderizarReport);
+    $('#processar').prop('disabled', true);
+
+    connection.on("ResultadoProcessamento", renderizarReport);
     
-    connection.start().catch(function (err) {
+    connection.start().then(function() {
+        $('#processar').prop('disabled', false);
+    }).catch(function (err) {
         return console.log(err.toString());
     });
 
@@ -16,7 +20,10 @@ $(function () {
 function processar(e) {
     e.preventDefault();
 
-    connection.invoke("Processar");
+    $.ajax({
+        type: "POST",
+        url: 'Processamento/Processar'
+    });
 }
 
 function renderizarReport(itemProcessado, percentual) {

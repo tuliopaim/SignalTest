@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SignalTest.Application.Services.Interfaces
 {
-    public interface IProcessService
+    public interface IProcessamentoService
     {
         Task Processar(Guid id);
     }

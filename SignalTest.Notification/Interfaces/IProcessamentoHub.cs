@@ -5,6 +5,6 @@ namespace SignalTest.Infra.Notification.Interfaces
 {
     public interface IProcessamentoHub
     {
-        Task NotificarProcessamento(Guid userId, string item, decimal percentual);
+        Task ResultadoProcessamento(string item, decimal percentual);
     }
 }

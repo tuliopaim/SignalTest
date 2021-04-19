@@ -18,7 +18,7 @@ namespace SignalTest.Infra.Notification.NofificationServices
 
         public async Task NotificarProcessamento(Guid userId, string itemProcessado, decimal percentual)
         {
-            await _hub.Clients.User(userId.ToString()).NotificarProcessamento(userId, itemProcessado, percentual);
+            await _hub.Clients.User(userId.ToString()).ResultadoProcessamento(itemProcessado, percentual);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace SignalTest.MVC.Configuration
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITweetService, TweetService>();
-            services.AddScoped<IProcessService, ProcessService>();
+            services.AddScoped<IProcessamentoService, ProcessamentoService>();
 
             services.AddScoped<IProcessoNotificationService, ProcessoNotificationService>();
             services.AddScoped<ITweetNotificationService, TweetNotificationService>();

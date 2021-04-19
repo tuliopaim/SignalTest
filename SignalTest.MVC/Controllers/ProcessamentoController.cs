@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SignalTest.Application.Services.Interfaces;
@@ -6,11 +7,12 @@ using SignalTest.Application.Services.Interfaces;
 namespace SignalTest.MVC.Controllers
 {
     [Authorize]
-    public class ProcessamentoController : Controller
+    public class ProcessamentoController : BaseController
     {
-        private readonly IUserService _service;
+        private readonly IProcessamentoService _service;
 
-        public ProcessamentoController(IUserService service)
+        public ProcessamentoController(
+            IProcessamentoService service)
         {
             _service = service;
         }
@@ -18,9 +20,23 @@ namespace SignalTest.MVC.Controllers
         // GET
         public IActionResult Index()
         {
-            var id = Guid.NewGuid();
+            return View();
+        }
 
-            return View(id);
+        [HttpPost]
+        public async Task<IActionResult> Processar()
+        {
+            try
+            {
+                await _service.Processar(ObterIdUsuarioLogado());
+                
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return BadRequest();
+            }
         }
     }
 }
