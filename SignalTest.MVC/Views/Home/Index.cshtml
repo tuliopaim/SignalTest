@@ -1,4 +1,4 @@
-﻿@model string
+﻿@model HomeModel
 @{
     ViewData["Title"] = "Home";
 }
@@ -9,12 +9,19 @@
 
     <div class="row">
         <h4 id="boasVindas">
-            Olá @Model, <span id="quantity">0</span> usuários online nos últimos 5 minutos!
+            Olá @Model.UsuarioLogado, <span id="quantity">@Model.Usuarios.Count()</span> usuários online nos últimos 5 minutos!
         </h4>
     </div>
 
     <div class="row">
-        <ul id="usersOnline" class="list-group list-group-flush"></ul>
+        <ul id="usersOnline" class="list-group list-group-flush">
+            @foreach (var usuario in Model.Usuarios)
+            {
+                <li class="list-group-item">
+                    <b>@usuario.Nome</b> online às <b>@usuario.VistoPorUltimoStr</b>
+                </li>
+            }
+        </ul>
     </div>
 
     <hr/>
@@ -22,9 +29,6 @@
     <div class="row">
         <div class="col-4">
             <input type="button" id="estouOnline" class="btn btn-primary" value="Estou online!"/>
-        </div>
-        <div class="col-4">
-            <input type="button" id="atualizarLista" class="btn btn-primary" value="Atualizar lista"/>
         </div>
     </div>
 </div>

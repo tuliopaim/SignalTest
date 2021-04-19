@@ -8,4 +8,8 @@
     <ProjectReference Include="..\SignalTest.Domain\SignalTest.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="InputModels\" />
+  </ItemGroup>
+
 </Project>

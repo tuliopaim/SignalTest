@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using SignalTest.MVC.Models;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using SignalTest.Application.Services.Interfaces;
 
@@ -16,15 +18,37 @@ namespace SignalTest.MVC.Controllers
             _service = service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(nameof(Index), ObterNomeUsuarioLogado());
+            var usuariosOnline = await _service.ObterTodosOnline();
+
+            return View(nameof(Index), new HomeModel
+            {
+                UsuarioLogado = ObterNomeUsuarioLogado(),
+                Usuarios = usuariosOnline,
+            });
         }
         
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EstouAqui()
+        {
+            try
+            {
+                await _service.EstouAqui(ObterIdUsuarioLogado());
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return BadRequest();
+            }
         }
     }
 }

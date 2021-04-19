@@ -40,15 +40,19 @@ namespace SignalTest.Application.Services
             var userDto = ConverterParaViewModel(user);
 
             await _notification.NotificarNovoUsuarioOnline(userDto);
+            await NotificarTodosOsUsuariosOnline();
         }
-        
-        public async Task EstouAqui(string idString)
+
+        public async Task EstouAqui(Guid userId)
         {
-            if (!Guid.TryParse(idString, out var id))
-                return;
+            var id = userId.ToString();
+            await AtualizarVistoPorUltimo(userId);
 
-            await AtualizarVistoPorUltimo(id);
+            await NotificarTodosOsUsuariosOnline();
+        }
 
+        public async Task NotificarTodosOsUsuariosOnline()
+        {
             var usuarios = await ObterTodosOnline();
 
             await _notification.NotificarUsuariosOnline(usuarios);
@@ -56,7 +60,7 @@ namespace SignalTest.Application.Services
 
         public async Task<IEnumerable<UserDto>> ObterTodosOnline()
         {
-            var data = DateTime.Now.AddMinutes(-5);
+            var data = DateTime.Now.AddSeconds(-35);
 
             var lista = await _repository.ObterTodosOnline(data);
 

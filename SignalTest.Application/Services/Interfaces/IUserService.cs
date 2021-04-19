@@ -9,7 +9,8 @@ namespace SignalTest.Application.Services.Interfaces
     public interface IUserService
     {
         Task NotificarLogin(string email);
-        Task EstouAqui(string idString);
+        Task EstouAqui(Guid idString);
+        Task NotificarTodosOsUsuariosOnline();
         Task<IEnumerable<UserDto>> ObterTodosOnline();
         Task<UserDto> ObterPorId(Guid userId);
         Task<IEnumerable<UserDto>> ObterTodos();
