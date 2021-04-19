@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalTest.MVC", "SignalTest.MVC\SignalTest.MVC.csproj", "{08CA6260-7479-4E5F-8709-314BF6FA76C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalTest.Infra.Notification", "SignalTest.Notification\SignalTest.Infra.Notification.csproj", "{D73E3F65-3E24-4190-9D13-0F8E235FE4B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalTest.Infra.Notification", "SignalTest.Infra.Notification\SignalTest.Infra.Notification.csproj", "{D73E3F65-3E24-4190-9D13-0F8E235FE4B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Application", "1-Application", "{07A4CDDA-86E7-46AF-B974-FAF4F9B98138}"
 EndProject
@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Infra", "3-Infra", "{C012
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalTest.Domain", "SignalTest.Domain\SignalTest.Domain.csproj", "{B6AEEE28-7EB9-464A-A37D-68C73471A4E2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalTest.Infra.Data", "SignalTest.Data\SignalTest.Infra.Data.csproj", "{FBCDA924-2F63-4776-BF59-4F9150011662}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalTest.Infra.Data", "SignalTest.Infra.Data\SignalTest.Infra.Data.csproj", "{FBCDA924-2F63-4776-BF59-4F9150011662}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
